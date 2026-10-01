@@ -11,8 +11,8 @@
  * "service_role key".
  */
 window.APP_CONFIG = {
-  SUPABASE_URL: "", // ej: "https://xxxxxxxx.supabase.co"
-  SUPABASE_ANON_KEY: "", // ej: "eyJhbGciOi..."
+  SUPABASE_URL: "https://wigmyadrawyltsmamjdd.supabase.co/rest/v1/", // ej: "https://xxxxxxxx.supabase.co"
+  SUPABASE_ANON_KEY: "sb_publishable_pNIVYRE6909hUO0nNRBVlw_dS7-ofB9", // ej: "eyJhbGciOi..."
 
   // Nombre del canal WhatsApp / línea de cotizaciones a mostrar en el sitio
   WHATSAPP_COTIZACIONES: "3024754841",
