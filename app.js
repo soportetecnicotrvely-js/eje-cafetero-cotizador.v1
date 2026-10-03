@@ -152,10 +152,10 @@
     if (cfg.SUPABASE_URL && cfg.SUPABASE_ANON_KEY && window.supabase) {
       try {
         state.supabase = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
-        const { data: tiersRows, error: tiersErr } = await state.supabase.from("pricing_tiers").select("*");
+        const { data: tiersRows, error: tiersErr } = await state.supabase.from("tarifas").select("*");
         if (tiersErr) throw tiersErr;
         const { data: depRows, error: depErr } = await state.supabase
-          .from("departures").select("*").eq("active", true).order("salida", { ascending: true });
+          .from("salidas").select("*").eq("active", true).order("salida", { ascending: true });
         if (depErr) throw depErr;
         state.tiers = Object.fromEntries(tiersRows.map((t) => [t.id, t]));
         state.departures = depRows;
@@ -416,7 +416,7 @@
         if (state.supabase) {
           // Sin .select(): la tabla es de solo-inserción para el navegador,
           // no tiene permiso de SELECT ni para leer la fila que acaba de crear.
-          const { error } = await state.supabase.from("prereservations").insert(payload);
+          const { error } = await state.supabase.from("prereservas").insert(payload);
           if (error) throw error;
         } else {
           console.info("[DEMO] Prereserva (sin Supabase configurado):", payload);
