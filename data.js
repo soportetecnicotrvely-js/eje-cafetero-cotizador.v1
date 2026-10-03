@@ -1,7 +1,7 @@
 /**
  * data.js
  * Datos del cotizador "Eje Cafetero Recargado 2026-2027".
- * Es la MISMA información que vive en Supabase (tabla pricing_tiers + departures).
+ * Es la MISMA información que vive en Supabase (tabla tarifas + salidas).
  * Sirve de respaldo local (modo demo) y de fuente para sembrar la base de datos.
  *
  * Cada tarifario (tier) trae, además del precio, el detalle específico de esa
@@ -43,7 +43,7 @@ const ITINERARIES = {
 };
 
 // ---------------------------------------------------------------------------
-// TARIFARIOS (pricing_tiers) — precio + detalle de cada salida
+// TARIFARIOS (tarifas) — precio + detalle de cada salida
 // ---------------------------------------------------------------------------
 const PRICING_TIERS = {
   tb2026: {
@@ -52,8 +52,8 @@ const PRICING_TIERS = {
     noches: 3,
     sencilla: 1399000, doble: 1199000, triple: 1099000, cuadruple: 1099000, quintuple: 1099000,
     nino: 1049000, infante: 70000,
-    lodging: "Habitación privada con TV, toallas y baño",
-    meals_note: "4 desayunos, 3 cenas y 1 almuerzo",
+    alojamiento: "Habitación privada con TV, toallas y baño",
+    nota_comidas: "4 desayunos, 3 cenas y 1 almuerzo",
     incluye: [
       "Transporte terrestre en bus, van o vehículo particular según el número de pasajeros",
       "3 noches de alojamiento en habitación privada con TV, toallas y baño",
@@ -67,8 +67,8 @@ const PRICING_TIERS = {
       "Guía profesional de turismo y asistencia médica durante el recorrido",
       "Obsequio: paseo a caballo en el hotel",
     ],
-    special_note: "Salidas cerradas en 2026: 17 al 21 de junio · 01 al 05, 08 al 12 y 22 al 26 de julio.",
-    itinerario_key: "regular",
+    nota_especial: "Salidas cerradas en 2026: 17 al 21 de junio · 01 al 05, 08 al 12 y 22 al 26 de julio.",
+    itinerario_clave: "regular",
   },
   puentes2026: {
     id: "puentes2026",
@@ -76,8 +76,8 @@ const PRICING_TIERS = {
     noches: 3,
     sencilla: 1399000, doble: 1199000, triple: 1099000, cuadruple: 1099000, quintuple: 1099000,
     nino: 1049000, infante: 70000,
-    lodging: "Habitación privada con TV, toallas y baño",
-    meals_note: "4 desayunos, 3 cenas y 1 almuerzo",
+    alojamiento: "Habitación privada con TV, toallas y baño",
+    nota_comidas: "4 desayunos, 3 cenas y 1 almuerzo",
     incluye: [
       "Transporte terrestre en bus, van o vehículo particular según el número de pasajeros",
       "3 noches de alojamiento en habitación privada con TV, toallas y baño",
@@ -91,8 +91,8 @@ const PRICING_TIERS = {
       "Guía profesional de turismo y asistencia médica durante el recorrido",
       "Obsequio: paseo a caballo en el hotel",
     ],
-    special_note: "Salida de puente festivo: jueves a lunes festivo.",
-    itinerario_key: "regular",
+    nota_especial: "Salida de puente festivo: jueves a lunes festivo.",
+    itinerario_clave: "regular",
   },
   receso2026: {
     id: "receso2026",
@@ -100,8 +100,8 @@ const PRICING_TIERS = {
     noches: 3,
     sencilla: 1499000, doble: 1299000, triple: 1199000, cuadruple: 1199000, quintuple: 1199000,
     nino: 1149000, infante: 70000,
-    lodging: "Finca hotel con piscina, habitación privada con TV, baño y toallas",
-    meals_note: "4 desayunos, 3 cenas y 1 almuerzo",
+    alojamiento: "Finca hotel con piscina, habitación privada con TV, baño y toallas",
+    nota_comidas: "4 desayunos, 3 cenas y 1 almuerzo",
     incluye: [
       "Transporte terrestre en bus, van o vehículo particular según el número de pasajeros",
       "3 noches de alojamiento en finca hotel con piscina, habitación privada con TV, baño y toallas",
@@ -114,8 +114,8 @@ const PRICING_TIERS = {
       "Guía profesional de turismo y asistencia médica durante el recorrido",
       "Obsequio: paseo a caballo en el hotel",
     ],
-    special_note: null,
-    itinerario_key: "regular",
+    nota_especial: null,
+    itinerario_clave: "regular",
   },
   velas2026: {
     id: "velas2026",
@@ -123,8 +123,8 @@ const PRICING_TIERS = {
     noches: 3,
     sencilla: 1499000, doble: 1299000, triple: 1199000, cuadruple: 1199000, quintuple: 1199000,
     nino: 1149000, infante: 70000,
-    lodging: "Finca hotel con piscina, habitación privada con TV, baño y toallas",
-    meals_note: "4 desayunos, 3 cenas y 1 almuerzo",
+    alojamiento: "Finca hotel con piscina, habitación privada con TV, baño y toallas",
+    nota_comidas: "4 desayunos, 3 cenas y 1 almuerzo",
     incluye: [
       "Transporte terrestre en bus, van o vehículo particular según el número de pasajeros",
       "3 noches de alojamiento en finca hotel con piscina, habitación privada con TV, baño y toallas",
@@ -138,8 +138,8 @@ const PRICING_TIERS = {
       "Guía profesional de turismo y asistencia médica durante el recorrido",
       "Obsequio: paseo a caballo en el hotel",
     ],
-    special_note: "Por el toque de queda que decreta la alcaldía de Quimbaya durante el festival, el bus se queda a la entrada del pueblo: se debe entrar y salir caminando. No se hace la salida del 02 de diciembre.",
-    itinerario_key: "regular",
+    nota_especial: "Por el toque de queda que decreta la alcaldía de Quimbaya durante el festival, el bus se queda a la entrada del pueblo: se debe entrar y salir caminando. No se hace la salida del 02 de diciembre.",
+    itinerario_clave: "regular",
   },
   navidad2026: {
     id: "navidad2026",
@@ -147,8 +147,8 @@ const PRICING_TIERS = {
     noches: 3,
     sencilla: 1649000, doble: 1449000, triple: 1349000, cuadruple: 1349000, quintuple: 1349000,
     nino: 1299000, infante: 70000,
-    lodging: "Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
-    meals_note: "4 desayunos, 3 cenas y 1 almuerzo",
+    alojamiento: "Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
+    nota_comidas: "4 desayunos, 3 cenas y 1 almuerzo",
     incluye: [
       "Transporte terrestre en bus, van o vehículo particular según el número de pasajeros",
       "3 noches de alojamiento en Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
@@ -162,8 +162,8 @@ const PRICING_TIERS = {
       "Guía profesional de turismo y asistencia médica durante el recorrido",
       "Obsequio: paseo a caballo en el hotel",
     ],
-    special_note: null,
-    itinerario_key: "regular",
+    nota_especial: null,
+    itinerario_clave: "regular",
   },
   prefin2026: {
     id: "prefin2026",
@@ -171,8 +171,8 @@ const PRICING_TIERS = {
     noches: 3,
     sencilla: 1649000, doble: 1449000, triple: 1349000, cuadruple: 1349000, quintuple: 1349000,
     nino: 1299000, infante: 70000,
-    lodging: "Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
-    meals_note: "4 desayunos, 3 cenas y 1 almuerzo",
+    alojamiento: "Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
+    nota_comidas: "4 desayunos, 3 cenas y 1 almuerzo",
     incluye: [
       "Transporte terrestre en bus, van o vehículo particular según el número de pasajeros",
       "3 noches de alojamiento en Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
@@ -186,8 +186,8 @@ const PRICING_TIERS = {
       "Guía profesional de turismo y asistencia médica durante el recorrido",
       "Obsequio: paseo a caballo en el hotel",
     ],
-    special_note: "Salida sábado a miércoles.",
-    itinerario_key: "regular",
+    nota_especial: "Salida sábado a miércoles.",
+    itinerario_clave: "regular",
   },
   findeanio2026: {
     id: "findeanio2026",
@@ -195,8 +195,8 @@ const PRICING_TIERS = {
     noches: 4,
     sencilla: null, doble: 1849000, triple: 1749000, cuadruple: 1749000, quintuple: 1749000,
     nino: 1699000, infante: 80000,
-    lodging: "Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
-    meals_note: "5 desayunos, 4 cenas y 2 almuerzos. La noche del 31 de diciembre incluye una cena especial de tres tiempos (entrada, plato fuerte y postre).",
+    alojamiento: "Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
+    nota_comidas: "5 desayunos, 4 cenas y 2 almuerzos. La noche del 31 de diciembre incluye una cena especial de tres tiempos (entrada, plato fuerte y postre).",
     incluye: [
       "Transporte terrestre en bus, van o vehículo particular según el número de pasajeros",
       "4 noches de alojamiento en Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
@@ -211,8 +211,8 @@ const PRICING_TIERS = {
       "Guía profesional de turismo y asistencia médica durante el recorrido",
       "Obsequio: paseo a caballo en el hotel",
     ],
-    special_note: "¡Últimos cupos en acomodación múltiple! Esta salida no tiene tarifa sencilla.",
-    itinerario_key: "findeanio",
+    nota_especial: "¡Últimos cupos en acomodación múltiple! Esta salida no tiene tarifa sencilla.",
+    itinerario_clave: "findeanio",
   },
   prereyes2027: {
     id: "prereyes2027",
@@ -220,8 +220,8 @@ const PRICING_TIERS = {
     noches: 3,
     sencilla: 1649000, doble: 1449000, triple: 1349000, cuadruple: 1349000, quintuple: 1349000,
     nino: 1299000, infante: 70000,
-    lodging: "Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
-    meals_note: "4 desayunos, 3 cenas y 1 almuerzo",
+    alojamiento: "Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
+    nota_comidas: "4 desayunos, 3 cenas y 1 almuerzo",
     incluye: [
       "Transporte terrestre en bus, van o vehículo particular según el número de pasajeros",
       "3 noches de alojamiento en Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
@@ -235,8 +235,8 @@ const PRICING_TIERS = {
       "Guía profesional de turismo y asistencia médica durante el recorrido",
       "Obsequio: paseo a caballo en el hotel",
     ],
-    special_note: "Salida domingo a jueves.",
-    itinerario_key: "regular",
+    nota_especial: "Salida domingo a jueves.",
+    itinerario_clave: "regular",
   },
   reyes2027: {
     id: "reyes2027",
@@ -244,8 +244,8 @@ const PRICING_TIERS = {
     noches: 3,
     sencilla: 1649000, doble: 1449000, triple: 1349000, cuadruple: 1349000, quintuple: 1349000,
     nino: 1299000, infante: 70000,
-    lodging: "Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
-    meals_note: "4 desayunos, 3 cenas y 1 almuerzo",
+    alojamiento: "Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
+    nota_comidas: "4 desayunos, 3 cenas y 1 almuerzo",
     incluye: [
       "Transporte terrestre en bus, van o vehículo particular según el número de pasajeros",
       "3 noches de alojamiento en Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
@@ -259,8 +259,8 @@ const PRICING_TIERS = {
       "Guía profesional de turismo y asistencia médica durante el recorrido",
       "Obsequio: paseo a caballo en el hotel",
     ],
-    special_note: "Puente festivo: jueves a lunes festivo.",
-    itinerario_key: "regular",
+    nota_especial: "Puente festivo: jueves a lunes festivo.",
+    itinerario_clave: "regular",
   },
   tb2027: {
     id: "tb2027",
@@ -268,8 +268,8 @@ const PRICING_TIERS = {
     noches: 3,
     sencilla: 1499000, doble: 1299000, triple: 1199000, cuadruple: 1199000, quintuple: 1199000,
     nino: 1149000, infante: 70000,
-    lodging: "Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
-    meals_note: "4 desayunos, 3 cenas y 1 almuerzo",
+    alojamiento: "Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
+    nota_comidas: "4 desayunos, 3 cenas y 1 almuerzo",
     incluye: [
       "Transporte terrestre en bus, van o vehículo particular según el número de pasajeros",
       "3 noches de alojamiento en Finca Hotel Nuestro Sueño, habitación privada con TV, baño y toallas",
@@ -283,27 +283,27 @@ const PRICING_TIERS = {
       "Guía profesional de turismo y asistencia médica durante el recorrido",
       "Obsequio: paseo a caballo en el hotel",
     ],
-    special_note: null,
-    itinerario_key: "regular",
+    nota_especial: null,
+    itinerario_clave: "regular",
   },
 };
 
 // ---------------------------------------------------------------------------
-// SALIDAS (departures) — fechas FIJAS de salida
+// SALIDAS (salidas) — fechas FIJAS de salida
 // ---------------------------------------------------------------------------
 const DEPARTURES = [
-  { id: "dep-receso-2026", tier: "receso2026", etiqueta: "08 al 12 de octubre de 2026", salida: "2026-10-08", regreso: "2026-10-12" },
-  { id: "dep-velas-2026", tier: "velas2026", etiqueta: "04 al 08 de diciembre de 2026", salida: "2026-12-04", regreso: "2026-12-08" },
-  { id: "dep-navidad-2026", tier: "navidad2026", etiqueta: "23 al 27 de diciembre de 2026", salida: "2026-12-23", regreso: "2026-12-27" },
-  { id: "dep-prefin-2026", tier: "prefin2026", etiqueta: "26 al 30 de diciembre de 2026", salida: "2026-12-26", regreso: "2026-12-30" },
-  { id: "dep-findeanio-2026", tier: "findeanio2026", etiqueta: "29 de diciembre al 03 de enero de 2027", salida: "2026-12-29", regreso: "2027-01-03" },
-  { id: "dep-prereyes-2027", tier: "prereyes2027", etiqueta: "03 al 07 de enero de 2027", salida: "2027-01-03", regreso: "2027-01-07" },
-  { id: "dep-reyes-2027", tier: "reyes2027", etiqueta: "07 al 11 de enero de 2027", salida: "2027-01-07", regreso: "2027-01-11" },
-  { id: "dep-tb-2026-09-16", tier: "tb2026", etiqueta: "16 al 20 de septiembre de 2026", salida: "2026-09-16", regreso: "2026-09-20" },
-  { id: "dep-tb-2026-09-30", tier: "tb2026", etiqueta: "30 sep. al 04 de octubre de 2026", salida: "2026-09-30", regreso: "2026-10-04" },
-  { id: "dep-tb-2026-10-14", tier: "tb2026", etiqueta: "14 al 18 de octubre de 2026", salida: "2026-10-14", regreso: "2026-10-18" },
-  { id: "dep-tb-2026-11-11", tier: "tb2026", etiqueta: "11 al 15 de noviembre de 2026", salida: "2026-11-11", regreso: "2026-11-15" },
-  { id: "dep-tb-2027-01-20", tier: "tb2027", etiqueta: "20 al 24 de enero de 2027", salida: "2027-01-20", regreso: "2027-01-24" },
+  { id: "dep-receso-2026", tarifa_id: "receso2026", etiqueta: "08 al 12 de octubre de 2026", salida: "2026-10-08", regreso: "2026-10-12" },
+  { id: "dep-velas-2026", tarifa_id: "velas2026", etiqueta: "04 al 08 de diciembre de 2026", salida: "2026-12-04", regreso: "2026-12-08" },
+  { id: "dep-navidad-2026", tarifa_id: "navidad2026", etiqueta: "23 al 27 de diciembre de 2026", salida: "2026-12-23", regreso: "2026-12-27" },
+  { id: "dep-prefin-2026", tarifa_id: "prefin2026", etiqueta: "26 al 30 de diciembre de 2026", salida: "2026-12-26", regreso: "2026-12-30" },
+  { id: "dep-findeanio-2026", tarifa_id: "findeanio2026", etiqueta: "29 de diciembre al 03 de enero de 2027", salida: "2026-12-29", regreso: "2027-01-03" },
+  { id: "dep-prereyes-2027", tarifa_id: "prereyes2027", etiqueta: "03 al 07 de enero de 2027", salida: "2027-01-03", regreso: "2027-01-07" },
+  { id: "dep-reyes-2027", tarifa_id: "reyes2027", etiqueta: "07 al 11 de enero de 2027", salida: "2027-01-07", regreso: "2027-01-11" },
+  { id: "dep-tb-2026-09-16", tarifa_id: "tb2026", etiqueta: "16 al 20 de septiembre de 2026", salida: "2026-09-16", regreso: "2026-09-20" },
+  { id: "dep-tb-2026-09-30", tarifa_id: "tb2026", etiqueta: "30 sep. al 04 de octubre de 2026", salida: "2026-09-30", regreso: "2026-10-04" },
+  { id: "dep-tb-2026-10-14", tarifa_id: "tb2026", etiqueta: "14 al 18 de octubre de 2026", salida: "2026-10-14", regreso: "2026-10-18" },
+  { id: "dep-tb-2026-11-11", tarifa_id: "tb2026", etiqueta: "11 al 15 de noviembre de 2026", salida: "2026-11-11", regreso: "2026-11-15" },
+  { id: "dep-tb-2027-01-20", tarifa_id: "tb2027", etiqueta: "20 al 24 de enero de 2027", salida: "2027-01-20", regreso: "2027-01-24" },
 ];
 
 window.NO_INCLUYE = NO_INCLUYE;
