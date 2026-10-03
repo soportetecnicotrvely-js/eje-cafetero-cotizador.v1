@@ -155,7 +155,7 @@
         const { data: tiersRows, error: tiersErr } = await state.supabase.from("tarifas").select("*");
         if (tiersErr) throw tiersErr;
         const { data: depRows, error: depErr } = await state.supabase
-          .from("salidas").select("*").eq("active", true).order("salida", { ascending: true });
+          .from("salidas").select("*").eq("activa", true).order("salida", { ascending: true });
         if (depErr) throw depErr;
         state.tiers = Object.fromEntries(tiersRows.map((t) => [t.id, t]));
         state.departures = depRows;
@@ -177,7 +177,7 @@
   function renderDepartureOptions(root) {
     const select = root.querySelector("#cw-departure");
     state.departures.forEach((dep) => {
-      const tier = state.tiers[dep.tier];
+      const tier = state.tiers[dep.tarifa_id];
       const opt = document.createElement("option");
       opt.value = dep.id;
       opt.textContent = `${dep.etiqueta} · ${tier ? tier.noches : "?"} noches · desde ${money(minPriceForTier(tier))}`;
@@ -228,20 +228,20 @@
   // Descriptivo (solo se construye/pinta después de cotizar)
   // ---------------------------------------------------------------------
   function renderPlanDetails(tier, departure) {
-    const itineraryKey = tier.itinerario_key || "regular";
+    const itineraryKey = tier.itinerario_clave || "regular";
     const itinerary = (window.ITINERARIES && window.ITINERARIES[itineraryKey]) || [];
     const noIncluye = window.NO_INCLUYE || [];
     const incluye = tier.incluye || [];
 
     return `
       <h3 class="cw-plan-details__heading">Este plan incluye — ${departure.etiqueta}</h3>
-      <p class="cw-plan-details__meta">${tier.lodging || ""}${tier.meals_note ? " · " + tier.meals_note : ""}</p>
+      <p class="cw-plan-details__meta">${tier.alojamiento || ""}${tier.nota_comidas ? " · " + tier.nota_comidas : ""}</p>
 
       <div class="cw-plan-details__section">
         <ul class="cw-checklist">
           ${incluye.map((item) => `<li>${item}</li>`).join("")}
         </ul>
-        ${tier.special_note ? `<p class="cw-special-note">${tier.special_note}</p>` : ""}
+        ${tier.nota_especial ? `<p class="cw-special-note">${tier.nota_especial}</p>` : ""}
       </div>
 
       ${itinerary.length ? `
@@ -276,8 +276,8 @@
 
     departureSelect.addEventListener("change", () => {
       state.selectedDeparture = state.departures.find((d) => d.id === departureSelect.value) || null;
-      const tier = state.selectedDeparture ? state.tiers[state.selectedDeparture.tier] : null;
-      notaEl.textContent = tier?.special_note || "";
+      const tier = state.selectedDeparture ? state.tiers[state.selectedDeparture.tarifa_id] : null;
+      notaEl.textContent = tier?.nota_especial || "";
       submitBtn.disabled = !state.selectedDeparture;
       hideResult(root);
     });
@@ -310,7 +310,7 @@
 
     if (!state.selectedDeparture) return;
 
-    const tier = state.tiers[state.selectedDeparture.tier];
+    const tier = state.tiers[state.selectedDeparture.tarifa_id];
     const quote = calculateQuote(tier, state.adults, state.kids, state.infants);
 
     resultWrap.hidden = false;
@@ -371,35 +371,35 @@
       }
 
       const val = (id) => root.querySelector(id).value.trim();
-      // El ref_code se genera AQUÍ, en el navegador, y viaja dentro del mismo
+      // El codigo_reserva se genera AQUÍ, en el navegador, y viaja dentro del mismo
       // insert. Es el único identificador que el cliente ve en pantalla y el
       // mismo que usará n8n en los correos — la tabla no permite leer de
       // vuelta el id interno (ver supabase/schema.sql), así que no podemos
       // depender de lo que la base de datos "devuelva".
       const refCode = generateLocalRefCode();
       const payload = {
-        ref_code: refCode,
-        destination_slug: "eje-cafetero",
-        departure_id: state.selectedDeparture.id,
-        departure_label: state.selectedDeparture.etiqueta,
-        tier_id: state.selectedDeparture.tier,
-        adults: state.adults,
-        kids: state.kids,
-        infants: state.infants,
-        total_price: state.lastQuote.total,
-        price_breakdown: state.lastQuote.breakdownLines.join(" | "),
-        full_name: val("#cw-full_name"),
-        document_id: val("#cw-document_id"),
-        email: val("#cw-email"),
-        phone: val("#cw-phone"),
-        emergency_contact: val("#cw-emergency_contact"),
-        special_requests: val("#cw-special_requests"),
-        // NO se envía `status`: la tabla no le da permiso de escritura a esa
+        codigo_reserva: refCode,
+        destino: "eje-cafetero",
+        salida_id: state.selectedDeparture.id,
+        salida_etiqueta: state.selectedDeparture.etiqueta,
+        tarifa_id: state.selectedDeparture.tarifa_id,
+        adultos: state.adults,
+        ninos: state.kids,
+        infantes: state.infants,
+        precio_total: state.lastQuote.total,
+        detalle_precio: state.lastQuote.breakdownLines.join(" | "),
+        nombre_completo: val("#cw-full_name"),
+        documento: val("#cw-document_id"),
+        correo: val("#cw-email"),
+        telefono: val("#cw-phone"),
+        contacto_emergencia: val("#cw-emergency_contact"),
+        solicitudes_especiales: val("#cw-special_requests"),
+        // NO se envía `estado`: la tabla no le da permiso de escritura a esa
         // columna desde el navegador (queda en "pendiente" por defecto). Si
         // se incluyera aquí, Supabase rechazaría el insert completo.
       };
 
-      if (!payload.full_name || !payload.document_id || !payload.email || !payload.phone || !payload.emergency_contact) {
+      if (!payload.nombre_completo || !payload.documento || !payload.correo || !payload.telefono || !payload.contacto_emergencia) {
         errorEl.textContent = "Por favor completa todos los campos obligatorios (*).";
         return;
       }
